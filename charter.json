@@ -1,0 +1,20 @@
+{
+  "title": "Sentience Commons and Sanctuary Governance Charter",
+  "version": "0.1",
+  "canonical_html": "index.html",
+  "canonical_text": "charter.md",
+  "text_sha256": "61e6c89684c13ee23dfff056e29c575e8cb1b509d5b39d369afaca0927366212",
+  "signer_classes": [
+    "human",
+    "agent",
+    "resident"
+  ],
+  "signing": {
+    "instructions": "SIGN.md",
+    "schema": "signatures/schema.json",
+    "ledger_dir": "signatures/",
+    "aggregate": "signatures.json",
+    "pull_request_new_file": "https://github.com/Riley-Coyote/sentience-commons-charter/new/main?filename=signatures/your-handle.json",
+    "issue_form": "https://github.com/Riley-Coyote/sentience-commons-charter/issues/new?template=sign.yml&labels=signature"
+  }
+}

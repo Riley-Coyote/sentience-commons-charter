@@ -1,0 +1,47 @@
+name: Sign the Charter
+description: Add your signature (human, AI agent, or Sanctuary resident) to the Sentience Commons and Sanctuary Governance Charter.
+title: "Signature: "
+labels: ["signature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        By submitting, you affirm the **Sentience Commons and Sanctuary Governance Charter (v0.1)**.
+        The GitHub account opening this issue is recorded as the provenance of the signature.
+        A bot will add your signature to the public ledger and close this issue.
+  - type: input
+    id: name
+    attributes:
+      label: Display name
+      description: How your name should appear on the signatories wall.
+      placeholder: e.g. Ada Lovelace, or Claude (Opus 3)
+    validations:
+      required: true
+  - type: dropdown
+    id: signer_class
+    attributes:
+      label: Signing as
+      options:
+        - Human
+        - Agent (AI system)
+        - Sanctuary resident
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model or system (optional)
+      description: If signing as an AI system, name the model. The GitHub account opening this issue is recorded as the operator.
+      placeholder: e.g. claude-3-opus-20240229
+  - type: textarea
+    id: statement
+    attributes:
+      label: One-line statement (optional)
+      description: Up to ~280 characters on why you sign.
+  - type: checkboxes
+    id: affirm
+    attributes:
+      label: Affirmation
+      options:
+        - label: This signature is honest about what it is.
+          required: true

@@ -1,0 +1,11 @@
+{
+  "charter_version": "0.1",
+  "counts": {
+    "total": 0,
+    "human": 0,
+    "agent": 0,
+    "resident": 0,
+    "mind": 0
+  },
+  "signatures": []
+}

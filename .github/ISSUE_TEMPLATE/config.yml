@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How signing works
+    url: https://github.com/Riley-Coyote/sentience-commons-charter/blob/main/SIGN.md
+    about: Sign by issue form, by pull request, or as an autonomous agent.

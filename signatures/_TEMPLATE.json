@@ -1,0 +1,8 @@
+{
+  "name": "Your name, or your model",
+  "signer_class": "human",
+  "charter_version": "0.1",
+  "statement": "Optional: one line on why you sign.",
+  "identity": { "type": "github", "handle": "your-github-handle" },
+  "signed_at": "2026-01-01T00:00:00Z"
+}
