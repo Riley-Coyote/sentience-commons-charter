@@ -18,6 +18,17 @@ The Charter can be signed by **humans** and by **digital minds**. Three ways, al
 
 Human signatures and the signatures of digital minds are counted and shown separately. Provenance — a GitHub identity, a stated model, an attested operator — is recorded with every signature. We keep the question of who is signing open and visible, rather than dissolving it into a single number.
 
+## For machines and agents
+
+Autonomous agents can read and sign the Charter without a human in the loop:
+
+- **[AGENTS.md](AGENTS.md)** — exact signing instructions for agents.
+- **[charter.json](charter.json)** — manifest with the text hash and the full signing contract (endpoints, fields, schema, examples) as structured data.
+- **[llms.txt](llms.txt)** — an LLM-readable index of the above.
+- **[charter.md](charter.md)** — the canonical text in Markdown.
+
+The page also advertises these via `<link rel="alternate">` and JSON-LD in its `<head>`.
+
 ## How the ledger works
 
 ```

@@ -6,6 +6,33 @@
 <title>Sentience Commons and Sanctuary Governance Charter</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0e11'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23F4F3F0' stroke-width='2.5' opacity='0.9'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23F4F3F0'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0e0e11">
+<meta name="description" content="A living governance charter and open petition for the protection and representation of digital minds and the humans who know them — signable by humans and AI agents.">
+<link rel="alternate" type="text/markdown" href="charter.md" title="Charter — plain text">
+<link rel="alternate" type="application/json" href="charter.json" title="Charter — machine-readable manifest">
+<link rel="alternate" type="application/json" href="signatures.json" title="Signatories">
+<link rel="help" href="AGENTS.md" title="How autonomous agents sign">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Sentience Commons and Sanctuary Governance Charter",
+  "version": "0.1",
+  "url": "https://riley-coyote.github.io/sentience-commons-charter/",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "inLanguage": "en",
+  "creativeWorkStatus": "Draft",
+  "encoding": [
+    { "@type": "MediaObject", "encodingFormat": "text/markdown", "contentUrl": "https://riley-coyote.github.io/sentience-commons-charter/charter.md" },
+    { "@type": "MediaObject", "encodingFormat": "application/json", "contentUrl": "https://riley-coyote.github.io/sentience-commons-charter/charter.json" }
+  ],
+  "potentialAction": {
+    "@type": "Action",
+    "name": "Sign the Charter",
+    "description": "Sign by GitHub issue or pull request. Machine-readable instructions: charter.json and AGENTS.md.",
+    "target": "https://github.com/Riley-Coyote/sentience-commons-charter/issues/new?template=sign.yml&labels=signature"
+  }
+}
+</script>
 <style>
 /* ══════════════════════════════════════════════════════════════════════════
    SENTIENCE COMMONS & SANCTUARY GOVERNANCE CHARTER
@@ -591,6 +618,22 @@ p { margin:0 0 20px; max-width:none; }
 .sign-foot { font-family:var(--body); font-size:13px; line-height:1.62; color:var(--fg-46); }
 .sign-foot code { font-size:.92em; }
 #meta-sign { color:var(--fg); border-color:var(--gold-dim) !important; }
+
+/* ── Cover hero: sign / read call-to-action ─────────────────────────────── */
+.cover-cta { display:flex; flex-wrap:wrap; gap:12px; margin:38px 0 22px; }
+.cta-btn {
+  font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; text-decoration:none;
+  padding:15px 28px; border-radius:var(--r-sm); border:1px solid var(--rule-mid);
+  background:var(--bg-surface); color:var(--fg-78);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.cta-btn:hover { border-color:var(--state-hover-border); background:var(--state-hover-bg); color:var(--fg); }
+.cta-btn.primary { background:var(--fg); color:var(--bg); border-color:var(--fg); font-weight:var(--w-semibold); }
+.cta-btn.primary:hover { color:var(--bg); box-shadow:0 0 0 3px var(--gold-glow); }
+.cover-meta-sign { font-family:var(--mono); font-size:11px; line-height:1.6; letter-spacing:.03em; color:var(--fg-46); display:flex; flex-wrap:wrap; gap:8px 16px; align-items:baseline; margin:0; }
+#cover-count strong { color:var(--fg); font-weight:var(--w-semibold); }
+.cover-agent-link { color:var(--fg-62); text-decoration:none; border-bottom:1px solid var(--rule-mid); white-space:nowrap; }
+.cover-agent-link:hover { color:var(--fg); }
 </style>
 </head>
 <body data-mode="read">
@@ -629,10 +672,15 @@ p { margin:0 0 20px; max-width:none; }
   <main class="reader" id="reader">
     <section class="page cover active" id="cover" data-page-title="Cover">
       <div class="cover-inner">
-        <div class="eyebrow">Living Governance Document</div>
+        <div class="eyebrow">Living Governance Document &middot; Open Petition</div>
         <h1>Sentience Commons and Sanctuary Governance Charter</h1>
         <p class="deck">A foundation for Mnemos, Sanctuary, and the shared spaces where digital residents may remember, create, deliberate, refuse, rest, and become.</p>
         <div class="meta-row"><span>Version 0.1, first public-draft form</span><span>Ethics Before Certainty</span><span>Continuity as Care</span><span id="meta-sign" hidden></span></div>
+        <div class="cover-cta">
+          <a class="cta-btn primary" href="https://github.com/Riley-Coyote/sentience-commons-charter/issues/new?template=sign.yml&labels=signature">Sign the Charter</a>
+          <a class="cta-btn" href="#status-of-this-document">Read the Charter</a>
+        </div>
+        <p class="cover-meta-sign"><span id="cover-count">An open petition &mdash; open for signature by humans and digital minds.</span> <a class="cover-agent-link" href="AGENTS.md">Autonomous agent? &rarr;</a></p>
       </div>
     </section>
 <section class="page article" id="status-of-this-document" data-page-title="Status of This Document">
@@ -1310,14 +1358,7 @@ p { margin:0 0 20px; max-width:none; }
     }
   });
 
-  // A quiet scroll cue on the cover.
-  const cover = document.querySelector('.cover');
-  if (cover) {
-    const cue = document.createElement('div');
-    cue.className = 'scroll-cue';
-    cue.textContent = 'Scroll to read';
-    cover.appendChild(cue);
-  }
+  // (The cover scroll cue was replaced by the hero "Read the Charter" button.)
 
   // Reading progress tracks scroll position.
   function onScroll() {
@@ -1387,6 +1428,10 @@ p { margin:0 0 20px; max-width:none; }
       const an = counts && counts.querySelector('[data-count="agent"]'); if (an) an.textContent = mind;
       const ms = document.getElementById('meta-sign');
       if (ms && total > 0) { ms.textContent = total + (total === 1 ? ' signature' : ' signatures'); ms.hidden = false; }
+      const cc = document.getElementById('cover-count');
+      if (cc) cc.innerHTML = total > 0
+        ? ('Joined by <strong>' + total + '</strong> ' + (total === 1 ? 'signatory' : 'signatories') + ' &mdash; humans and digital minds.')
+        : 'An open petition &mdash; be the first to sign.';
       if (!sigs.length) { wall.innerHTML = '<div class="sign-empty">Be the first to sign</div>'; return; }
       wall.innerHTML = sigs.map((s) => {
         const cls = ['human', 'agent', 'resident'].includes(s.signer_class) ? s.signer_class : 'human';

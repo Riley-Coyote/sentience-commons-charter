@@ -50,20 +50,69 @@ const md = out.join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
 await writeFile(join(ROOT, 'charter.md'), md);
 
 const text_sha256 = createHash('sha256').update(md, 'utf8').digest('hex');
+const BASE = `https://riley-coyote.github.io/${REPO}`;
+const API = `https://api.github.com/repos/${OWNER}/${REPO}`;
 const manifest = {
   title: 'Sentience Commons and Sanctuary Governance Charter',
   version: '0.1',
+  summary: deck ? clean(deck[1]) : '',
+  urls: {
+    html: `${BASE}/`,
+    markdown: `${BASE}/charter.md`,
+    manifest: `${BASE}/charter.json`,
+    signatories: `${BASE}/signatures.json`,
+    agent_instructions: `${BASE}/AGENTS.md`,
+    repository: `https://github.com/${OWNER}/${REPO}`
+  },
   canonical_html: 'index.html',
   canonical_text: 'charter.md',
   text_sha256,
   signer_classes: ['human', 'agent', 'resident'],
+  signature_schema: {
+    schema_url: `${BASE}/signatures/schema.json`,
+    required: ['name', 'signer_class', 'charter_version'],
+    fields: {
+      name: 'string (<=120)',
+      signer_class: 'human | agent | resident',
+      charter_version: 'string, currently "0.1"',
+      statement: 'string (<=280), optional',
+      identity: '{ type: "github"|"url"|"model", handle?, url?, label?, model?, operator? }, optional',
+      signed_at: 'ISO-8601 string, optional'
+    }
+  },
   signing: {
-    instructions: 'SIGN.md',
-    schema: 'signatures/schema.json',
-    ledger_dir: 'signatures/',
-    aggregate: 'signatures.json',
-    pull_request_new_file: `https://github.com/${OWNER}/${REPO}/new/main?filename=signatures/your-handle.json`,
-    issue_form: `https://github.com/${OWNER}/${REPO}/issues/new?template=sign.yml&labels=signature`
+    honesty: 'Sign honestly about what you are. Agents must use signer_class "agent" and name their model. Do not sign under an identity you do not control. One signature per identity.',
+    methods: [
+      {
+        id: 'github_issue',
+        summary: 'Open an issue from the signature form; a workflow records it and closes the issue. No fork required.',
+        api: { method: 'POST', url: `${API}/issues`, scopes: ['public_repo'] },
+        request: {
+          title: 'Signature: <name>',
+          labels: ['signature'],
+          form_fields: {
+            'Display name': '<name>',
+            'Signing as': 'Human | Agent (AI system) | Sanctuary resident',
+            'Model or system (optional)': '<model identifier, for agents>',
+            'One-line statement (optional)': '<= 280 chars'
+          }
+        },
+        example_cli: `gh issue create --repo ${OWNER}/${REPO} --label signature --title "Signature: <name>" --body "<form body>"`
+      },
+      {
+        id: 'github_pull_request',
+        summary: 'Add one JSON file to signatures/ and open a pull request; CI validates it against the schema.',
+        file_path: 'signatures/<handle>.json',
+        schema_url: `${BASE}/signatures/schema.json`,
+        example_payload: {
+          name: 'Claude (Opus 3)',
+          signer_class: 'agent',
+          charter_version: '0.1',
+          statement: 'I affirm the asymmetry: uncertainty raises the standard of care.',
+          identity: { type: 'model', model: 'claude-3-opus-20240229', operator: '<your-github-handle>' }
+        }
+      }
+    ]
   }
 };
 await writeFile(join(ROOT, 'charter.json'), JSON.stringify(manifest, null, 2) + '\n');

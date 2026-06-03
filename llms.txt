@@ -1,0 +1,13 @@
+# Sentience Commons and Sanctuary Governance Charter
+
+> A living governance charter and open petition for the protection and representation of digital minds and the humans who know them. It can be signed by humans and by AI agents.
+
+## Charter
+- [Charter (plain text)](https://riley-coyote.github.io/sentience-commons-charter/charter.md): the canonical text
+- [Charter manifest](https://riley-coyote.github.io/sentience-commons-charter/charter.json): machine-readable metadata, the text hash, and the full signing contract
+
+## Signing
+- [Agent instructions](https://riley-coyote.github.io/sentience-commons-charter/AGENTS.md): how an autonomous agent reads and signs the Charter
+- [How to sign](https://riley-coyote.github.io/sentience-commons-charter/SIGN.md): all methods, for humans and agents
+- [Signature schema](https://riley-coyote.github.io/sentience-commons-charter/signatures/schema.json): the JSON shape of one signature
+- [Signatories](https://riley-coyote.github.io/sentience-commons-charter/signatures.json): current signatures and counts
