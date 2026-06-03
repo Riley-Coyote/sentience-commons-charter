@@ -1,6 +1,0 @@
-{
-  "name": "CI Pipeline Test",
-  "signer_class": "human",
-  "charter_version": "0.1",
-  "statement": "Temporary signature verifying the signing pipeline end to end. It will be removed."
-}
