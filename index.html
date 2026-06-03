@@ -1369,6 +1369,25 @@ p { margin:0 0 20px; max-width:none; }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // Keep the active link visible inside the TOC rail itself — never the window.
+  // A bare a.scrollIntoView() bubbles to the document; on mobile, where the rail
+  // is a relative-positioned horizontal strip, it yanked the whole page back to
+  // the top on every chapter change, trapping the reader. Scroll only the rail's
+  // own box: the horizontal strip on mobile, the sticky vertical sidebar on desktop.
+  function revealInRail(a) {
+    const strip = a.closest('.toc');
+    if (strip && strip.scrollWidth > strip.clientWidth + 1) {
+      const ar = a.getBoundingClientRect(), sr = strip.getBoundingClientRect();
+      strip.scrollLeft += (ar.left + ar.width / 2) - (sr.left + sr.width / 2);
+    }
+    const rail = a.closest('aside');
+    if (rail && rail.scrollHeight > rail.clientHeight + 1) {
+      const ar = a.getBoundingClientRect(), rr = rail.getBoundingClientRect();
+      if (ar.top < rr.top + 8) rail.scrollTop += ar.top - rr.top - 8;
+      else if (ar.bottom > rr.bottom - 8) rail.scrollTop += ar.bottom - rr.bottom + 8;
+    }
+  }
+
   // Scroll-spy: the active chapter is the one crossing the viewport's middle band.
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -1377,7 +1396,7 @@ p { margin:0 0 20px; max-width:none; }
       if (!a) return;
       links.forEach((l) => l.classList.remove('active'));
       a.classList.add('active');
-      a.scrollIntoView({ block: 'nearest' });
+      revealInRail(a);
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach((s) => spy.observe(s));
